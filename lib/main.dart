@@ -51,8 +51,9 @@ class _AppState extends State<App> {
         routes: {
           NewTaskPage.routerName: (_) => ChangeNotifierProvider(
               create: (context) {
-                var repository = context.read<TodosRepository>();
-                return NewTaskController(repository: repository);
+                var day = ModalRoute.of(_).settings.arguments;
+                return NewTaskController(
+                    repository: context.read<TodosRepository>(), day: day);
               },
               child: NewTaskPage()),
         },

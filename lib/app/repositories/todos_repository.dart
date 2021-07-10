@@ -4,7 +4,7 @@ import 'package:todolist/app/models/todo_model.dart';
 class TodosRepository {
   Future<List<TodoModel>> findByPeriod(DateTime start, DateTime end) async {
     var startFilter = DateTime(start.year, start.month, start.day, 0, 0, 0);
-    var endFilter = DateTime(end.year, end.month, end.day, 0, 0, 0);
+    var endFilter = DateTime(end.year, end.month, end.day, 23, 59, 59);
 
     var conn = await Connection().instance;
     var result = await conn.rawQuery(
@@ -15,11 +15,11 @@ class TodosRepository {
     return result.map((t) => TodoModel.fromMap(t)).toList();
   }
 
-  Future<void> saveTodo(DateTime dataTimeTask, String desccricao) async {
+  Future<void> saveTodo(DateTime dataTimeTask, String descricao) async {
     var conn = await Connection().instance;
     await conn.rawInsert(
       "INSERT INTO todo VALUES(?,?,?,?)",
-      [null, desccricao, dataTimeTask.toIso8601String(), 0],
+      [null, descricao, dataTimeTask.toIso8601String(), 0],
     );
   }
 
