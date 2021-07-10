@@ -49,10 +49,10 @@ class _AppState extends State<App> {
           textTheme: GoogleFonts.robotoTextTheme(),
         ),
         routes: {
-          '/new': (_) => ChangeNotifierProvider(
+          NewTaskPage.routerName: (_) => ChangeNotifierProvider(
               create: (context) {
                 var repository = context.read<TodosRepository>();
-                NewTaskController(repository: repository);
+                return NewTaskController(repository: repository);
               },
               child: NewTaskPage()),
         },
